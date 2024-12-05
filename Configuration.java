@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import java.io.*;
 public class Configuration {
     private int totalTickets;
     private int ticketsRelRate;
@@ -50,11 +52,21 @@ public class Configuration {
             throw new IllegalArgumentException("Max ticket capacity must be greater than 0");
         }
     }
-
-    public boolean isValid() {
-        return totalTickets > 0 && ticketsRelRate > 0 &&
-                customerRetRate > 0 && maxTicketCapacity >= totalTickets;
+    public void saveToFile(String filePath) throws IOException {
+        Gson gson = new Gson();
+        try (Writer writer = new FileWriter(filePath)) {
+            gson.toJson(this, writer);
+        }
     }
+
+    // Load configuration from JSON file
+    public static Configuration loadFromFile(String filePath) throws IOException {
+        Gson gson = new Gson();
+        try (Reader reader = new FileReader(filePath)) {
+            return gson.fromJson(reader, Configuration.class);
+        }
+    }
+
 
     @Override
     public String toString() {
