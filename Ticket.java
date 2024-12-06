@@ -25,6 +25,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return String.format("Ticket{ID=%d, Event='%s', Price=%s}", ticketId, eventName, ticketPrice);
+        return String.format("Ticket{ID=%d, Event='%s', Price=%s}", getTicketId(), getEventName(), getTicketPrice());
     }
 }

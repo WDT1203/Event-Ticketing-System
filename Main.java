@@ -106,7 +106,7 @@ public class Main {
             return;
         }
 
-        System.out.println("Tickets currently available: " + ticketPool.getTicketCount());
+        System.out.println("Tickets currently available: " + ticketPool.getTktCount());
     }
 
     private static void saveConfiguration(Configuration config) {
