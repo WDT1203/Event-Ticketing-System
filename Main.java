@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,18 +11,20 @@ public class Main {
         Configuration config = null;
 
         while (true) {
+            System.out.println("************************");
             System.out.println("CLI of Ticketing System");
             System.out.println("01. Configure System.");
             System.out.println("02. Start System.");
-            System.out.println("03. Stop System.");
-            System.out.println("04. Check System Status.");
-            System.out.println("05. Save Configuration");
-            System.out.println("06. Load Configuration");
-            System.out.println("07. Display Logs.");
-            System.out.println("08. Exit.");
+            System.out.println("03. Check System Status.");
+            System.out.println("04. Save Configuration");
+            System.out.println("05. Load Configuration");
+            System.out.println("06. Display Logs.");
+            System.out.println("07. Exit.");
+            System.out.println("**-----------------------------**");
             System.out.print("Enter your choice: ");
 
-            int choice = input.nextInt();
+            try {
+                int choice = input.nextInt();
 
             switch (choice) {
                 case 1:
@@ -29,47 +32,57 @@ public class Main {
                     break;
                 case 2:
                     startVendors(config);
-                    break;
-                case 3:
                     startCustomers(config);
                     break;
-                case 4:
+                case 3:
                     checkSystemStatus();
                     break;
-                case 5:
+                case 4:
                     saveConfiguration(config);
                     break;
-                case 6:
+                case 5:
                     config = loadConfiguration();
                     break;
-                case 7:
+                case 6:
                     LogReader.displayLogs();
                     break;
-                case 8:
+                case 7:
                     System.exit(0);
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println("\"Invalid input. Enter a valid option(1-7 choices/) !\"");
 
             }
+        }catch (InputMismatchException e){
+            System.out.println("Invalid input. Enter a valid option(1-7 choices/) !");
+            input.nextLine();
+        }
         }
 
     }
 
     private static Configuration systemConfigure(Scanner input){
-        System.out.println("Enter number of Total Tickets: ");
+        System.out.print("Enter number of Total Tickets: ");
         int totalTickets = input.nextInt();
-        System.out.println("Enter the rate of Ticket Release: ");
+        System.out.print("Enter the rate of Ticket Release: ");
         int ticketsRelRate = input.nextInt();
-        System.out.println("Enter the rate of Customer Retrieval: ");
+        System.out.print("Enter the rate of Customer Retrieval: ");
         int customerRetRate = input.nextInt();
-        System.out.println("Enter the max Ticket capacity: ");
+        System.out.print("Enter the max Ticket capacity: ");
         int maxTicketCapacity = input.nextInt();
 
-        Configuration config = new Configuration(totalTickets, ticketsRelRate, customerRetRate, maxTicketCapacity);
+        Configuration config;
+        try {
+            config = new Configuration(totalTickets, ticketsRelRate, customerRetRate, maxTicketCapacity);
+            ticketPool = new TicketPool(config.getMaxTicketCapacity()); // Initialize the TicketPool
+            System.out.println("System configured successfully.");
+            return config;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+            return null; // Indicate configuration failure
+        }
 
-        ticketPool = new TicketPool(config.getMaxTicketCapacity()); // Initialize the TicketPool
-        System.out.println("System configured successfully.");
-        return config;
+
+
     }
 
     private static void startVendors(Configuration config) {
@@ -88,7 +101,6 @@ public class Main {
 
     private static void startCustomers(Configuration config) {
         if (config == null) {
-            System.out.println("Please configure the system first!");
             return;
         }
 

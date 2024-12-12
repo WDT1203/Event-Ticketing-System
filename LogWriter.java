@@ -14,7 +14,7 @@ public class LogWriter {
                 message, new Date());
 
         // Print to console
-        System.out.println(log);
+        //System.out.println(log);
 
         // Append to JSON log file
         try (FileWriter writer = new FileWriter(LOG_FILE, true)) {
