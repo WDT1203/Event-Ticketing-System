@@ -41,4 +41,37 @@ This repository contains a Java-based Event Ticketing System developed using Obj
    ```bash
    java -cp src Main
 
-### Usage
+## 📋 Usage
+
+Follow the on-screen prompts to:
+
+- Register  
+- Log in  
+- Browse events  
+- Purchase tickets  
+
+Organizers can:
+
+- Log in  
+- Create and manage events  
+- View ticket sales  
+
+---
+
+## Project Structure
+src/
+├── models/ # Contains core domain classes (User, Event, Ticket, etc.)
+├── services/ # Business logic and service classes
+├── ui/ # User interface (CLI or GUI)
+└── Main.java # Program entry point
+
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome.  
+For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
