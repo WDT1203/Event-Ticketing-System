@@ -31,31 +31,14 @@ This repository contains a Java-based Event Ticketing System developed using Obj
    ```bash
    git clone https://github.com/WDT1203/Event-Ticketing-System.git
    cd Event-Ticketing-System
-Compile the Java source files:
+2. Compile the Java source files:
 
-bash
-javac src/**/*.java
-Run the application:
+   ```bash
+   javac src/**/*.java
 
-bash
-java -cp src Main
-Replace Main with your actual main class name if it is different.
+3. Run the application:
 
-Usage
-Follow the on-screen prompts to register, log in, browse events, and purchase tickets.
-Organizers can create and manage their events after logging in.
-Project Structure
-Code
-src/
- ├── models/      # Contains core domain classes (User, Event, Ticket, etc.)
- ├── services/    # Business logic and service classes
- ├── ui/          # User interface (CLI or GUI)
- └── Main.java    # Program entry point
-Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+   ```bash
+   java -cp src Main
 
-License
-MIT (or specify your license)
-
-Author
-WDT1203
+### Usage
